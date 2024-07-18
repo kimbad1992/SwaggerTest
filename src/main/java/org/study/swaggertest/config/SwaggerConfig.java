@@ -36,7 +36,7 @@ public class SwaggerConfig {
 
         // 각 Server 환경 정보를 추가
         Server localServer = new Server();
-        localServer.setUrl("http://localhost:8080");
+        localServer.setUrl("http://localhost:3000");
         localServer.setDescription("Local Server");
 
         Server qaServer = new Server();

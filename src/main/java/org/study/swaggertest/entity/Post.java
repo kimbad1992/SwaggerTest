@@ -19,6 +19,8 @@ public class Post {
     private String content;
     private String author;
 
+    @Hidden
     private LocalDateTime createdAt;
+    @Hidden
     private LocalDateTime updatedAt;
 }
