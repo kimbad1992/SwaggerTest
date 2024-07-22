@@ -29,11 +29,6 @@ public class SwaggerConfig {
                 .type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
                 .in(SecurityScheme.In.HEADER).name("RefreshToken");
 
-
-        // SecurityScheme을 Security Requirement에 추가
-        SecurityRequirement securityRequirement = new SecurityRequirement()
-                .addList("accessTokenScheme").addList("refreshTokenScheme");
-
         // 각 Server 환경 정보를 추가
         Server localServer = new Server();
         localServer.setUrl("http://localhost:3000");
@@ -50,8 +45,11 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("Swagger 설명용 REST API Server")
-                        .version("1.0")
-                        .description("Swagger 설명용/간단한 CRUD를 위한 REST API 서버입니다.")
+                        .version("12.34.56")
+                        .description("""
+                                    간단한 CRUD를 위한 REST API 서버입니다.
+                                    Swagger 설명을 포함하고 있습니다.
+                                """)
 //                        .termsOfService("http://swagger.io/terms/")
 //                        .contact(new Contact()
 //                                .name("API Support")

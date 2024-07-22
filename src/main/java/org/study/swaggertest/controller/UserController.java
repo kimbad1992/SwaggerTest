@@ -3,7 +3,10 @@ package org.study.swaggertest.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -69,7 +72,7 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUser(
             @Parameter(description = "삭제될 회원의 ID")
-            @PathVariable Long id) {
+            @PathVariable Long id ) {
         return userService.findById(id)
                 .map(existingUser -> {
                     userService.deleteById(id);
@@ -78,15 +81,26 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+
     @Operation(summary = "[회원] 로그인", description = "username과 password로 로그인합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "로그인 요청 성공시 닉네임을 응답 받습니다.", content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(value = "{\"nickname\": \"닉네임\"}")
+            )),
+            @ApiResponse(responseCode = "401", description = "일치하는 회원이 없을 경우의 응답 코드입니다.", content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(value = "일치하는 정보가 없습니다.")
+            ))
+    })
     @PostMapping("/users/login")
     public ResponseEntity<String> login(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "로그인 정보",
                     required = true, content = @Content(schema = @Schema(implementation = LoginRequestDto.class)))
             @RequestBody LoginRequestDto loginRequest) {
-        Optional<String> nickname = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
+        Optional<String> nickname = userService.login(loginRequest.username(), loginRequest.password());
         return nickname.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.status(401).body("Invalid credentials"));
+                .orElse(ResponseEntity.status(401).body("일치하는 정보가 없습니다."));
     }
 
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.study.swaggertest.entity.CountryEnum;
 import org.study.swaggertest.entity.Explain;
 
-@Tag(name = "Tag의 명칭입니다.", description = "이 Tag를 설명하는 설명란입니다.\n" +
+@Tag(name = "특정 API 그룹", description = "이 Tag를 설명하는 설명란입니다.\n" +
         "컨트롤러 최상단에 Tag 어노테이션을 사용해서 해당 컨트롤러에서 사용되는 API를 하나의 카테고리로 묶을 수 있습니다.")
 @RestController
 @RequestMapping("/api/v1")
@@ -35,7 +35,7 @@ public class ExplanationController {
     public ResponseEntity<?> explanation(
             @Parameter(description = "해당 파라미터의 설명을 작성합니다.")
             @PathVariable Object someObject) {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "Swagger 파라미터 설명용")
@@ -47,6 +47,6 @@ public class ExplanationController {
             @RequestBody @Valid Explain explain,
             HttpServletRequest request) {
         log.debug("Authorization Header : {}", request.getHeader("Authorization"));
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 }

@@ -17,7 +17,8 @@ spring:
       initialize-schema: always
   jpa:
     hibernate:
-      ddl-auto: update # create, create-drop, validate, update ? ??? ??
+      # ??? ????? ?? DB ???? ??
+      ddl-auto: create-drop # create, create-drop, validate, update, none
     show-sql: true
     properties:
       hibernate:
