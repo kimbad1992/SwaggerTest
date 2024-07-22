@@ -49,6 +49,9 @@ dependencies {
     testImplementation 'org.mockito:mockito-core'
     testImplementation 'org.mockito:mockito-junit-jupiter'
 
+
+    // Selenium
+    implementation 'org.seleniumhq.selenium:selenium-java:4.6.0'
 }
 
 tasks.named('test') {
