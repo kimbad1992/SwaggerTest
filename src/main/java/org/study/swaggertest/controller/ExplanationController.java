@@ -10,11 +10,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.study.swaggertest.entity.CountryEnum;
 import org.study.swaggertest.entity.Explain;
+import org.study.swaggertest.service.WebScraper;
 
 @Tag(name = "특정 API 그룹", description = "이 Tag를 설명하는 설명란입니다.\n" +
         "컨트롤러 최상단에 Tag 어노테이션을 사용해서 해당 컨트롤러에서 사용되는 API를 하나의 카테고리로 묶을 수 있습니다.")
@@ -22,6 +23,9 @@ import org.study.swaggertest.entity.Explain;
 @RequestMapping("/api/v1")
 @Slf4j
 public class ExplanationController {
+
+    @Autowired
+    private WebScraper webScraper;
 
     @Operation(summary = "Operation 어노테이션의 summary 속성입니다.", description = "description 속성입니다. 해당 API를 설명합니다.")
     @ApiResponses(value = {
@@ -47,6 +51,16 @@ public class ExplanationController {
             @RequestBody @Valid Explain explain,
             HttpServletRequest request) {
         log.debug("Authorization Header : {}", request.getHeader("Authorization"));
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "Selenium 테스트용 API")
+    @PostMapping("/explain/selenium")
+    public ResponseEntity<?> seleniumTest(
+            @Parameter(description = "Triggered URL") @RequestBody String httpUrl) {
+        // 동적으로 대상 URL을 지정할 경우 사용할?
+        log.debug("Scrapping URL : {}", httpUrl);
+        webScraper.scrapping();
         return ResponseEntity.ok().build();
     }
 }

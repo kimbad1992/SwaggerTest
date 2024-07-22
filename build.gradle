@@ -49,9 +49,12 @@ dependencies {
     testImplementation 'org.mockito:mockito-core'
     testImplementation 'org.mockito:mockito-junit-jupiter'
 
-
     // Selenium
-    implementation 'org.seleniumhq.selenium:selenium-java:4.6.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.23.0'
+    implementation 'org.seleniumhq.selenium:selenium-devtools-v126:4.23.0'
+
+    // WebDriverManager
+    implementation 'io.github.bonigarcia:webdrivermanager:5.9.1'
 }
 
 tasks.named('test') {

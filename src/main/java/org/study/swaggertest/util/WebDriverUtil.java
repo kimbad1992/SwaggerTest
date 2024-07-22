@@ -1,30 +1,29 @@
 package org.study.swaggertest.util;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
+import java.io.File;
 import java.time.Duration;
 
 @Component
 public class WebDriverUtil {
 
-    private static String WEB_DRIVER_PATH = "/driver/chromedriver.exe";
-
     public static WebDriver getChromeDriver() {
-        if (ObjectUtils.isEmpty(System.getProperty("webdriver.chrome.driver"))) {
-            System.setProperty("webdriver.chrome.driver", WEB_DRIVER_PATH);
-        }
+        WebDriverManager.chromedriver().setup();
 
         // WebDriver 옵션 설정
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=true");
+        options.addArguments("--headless");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
-        options.setCapability("ignoreProtectedModeSettings", true);
+        // IE 브라우저 관련 옵션
+        // options.setCapability("ignoreProtectedModeSettings", true);
 
         WebDriver driver = new ChromeDriver(options);
         driver.manage()
