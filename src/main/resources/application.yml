@@ -5,8 +5,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/swagger_test
-    username: swagger
-    password: swagger#1
+    username: postgres
+    password: 1234
     type: com.zaxxer.hikari.HikariDataSource
   servlet:
     multipart:
@@ -14,11 +14,13 @@ spring:
       max-request-size: 10MB
   batch:
     jdbc:
-      initialize-schema: always
+      initialize-schema: always # Application 실행 시 메타 데이터 테이블 생성
+    job:
+      enabled: false # Application 실행 시 시작 방지
   jpa:
     hibernate:
       # ??? ????? ?? DB ???? ??
-      ddl-auto: create-drop # create, create-drop, validate, update, none
+      ddl-auto: update # create, create-drop, validate, update, none
     show-sql: true
     properties:
       hibernate:
@@ -34,6 +36,7 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+      force-response: true
     session:
       timeout: 1800
 springdoc:
