@@ -17,14 +17,18 @@ spring:
       initialize-schema: always
   jpa:
     hibernate:
-      # ??? ????? ?? DB ???? ??
-      ddl-auto: create-drop # create, create-drop, validate, update, none
+      ddl-auto: update # create, create-drop, validate, update, none
     show-sql: true
     properties:
       hibernate:
         format_sql: true
   application:
     name: SwaggerTest
+  mvc:
+    static-path-pattern: /static/**
+  web:
+    resources:
+      static-locations: /static/
 server:
   port: 3000
   tomcat:
@@ -41,3 +45,9 @@ springdoc:
     enabled: true
   swagger-ui:
     path: /swagger-ui
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){green} %clr(%-5level) %clr(${PID:-}){magenta} %clr(---){faint} [PayrollCalc] %clr(%logger - %M{10}){cyan} - %msg%n)"
+  level:
+    root: INFO
+    org.study: DEBUG

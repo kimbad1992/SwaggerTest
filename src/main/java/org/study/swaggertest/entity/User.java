@@ -24,16 +24,14 @@ public class User {
     @Column(nullable = false, length = 255)
     private String password;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, unique = true, length = 100) // unique 제약 조건 추가
     private String nickname;
 
     @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     @Hidden
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     @Hidden
     private LocalDateTime updatedAt;
 
@@ -48,3 +46,4 @@ public class User {
         updatedAt = LocalDateTime.now();
     }
 }
+

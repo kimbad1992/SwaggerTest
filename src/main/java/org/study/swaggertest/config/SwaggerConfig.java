@@ -34,6 +34,10 @@ public class SwaggerConfig {
         localServer.setUrl("http://localhost:3000");
         localServer.setDescription("Local Server");
 
+        Server devServer = new Server();
+        localServer.setUrl("http://192.168.31.188:3000");
+        localServer.setDescription("Dev Server");
+
         Server qaServer = new Server();
         qaServer.setUrl("https://my.qa.server");
         qaServer.setDescription("QA Server");
@@ -68,7 +72,7 @@ public class SwaggerConfig {
                         new SecurityRequirement().addList("accessTokenScheme"),
                         new SecurityRequirement().addList("refreshTokenScheme")
                 ))
-                .servers(List.of(localServer, qaServer, prodServer));
+                .servers(List.of(localServer, devServer, qaServer, prodServer));
     }
 
     @Bean

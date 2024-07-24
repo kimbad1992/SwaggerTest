@@ -45,6 +45,10 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.7.0')
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.0")
 
+    // Test Class에서 Annotation Processor가 동작하도록 설정
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
     // Mockito
     testImplementation 'org.mockito:mockito-core'
     testImplementation 'org.mockito:mockito-junit-jupiter'
