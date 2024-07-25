@@ -8,7 +8,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import org.study.swaggertest.entity.CountryEnum;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -68,5 +71,33 @@ public class 파라미터테스트 {
     @EnumSource(value = CountryEnum.class, mode = INCLUDE, names = {"CANADA", "TURKEY", "FRANCE"})
     void 이넘_모드(CountryEnum countryEnum) {
         log.info("names를 포함한 ENUM : {}", countryEnum);
+    }
+
+    @ParameterizedTest
+    @MethodSource(value = "methodTestProvider")
+    void 메서드_테스트(String str, int num, List<String> list) {
+        log.info("문자열 : {}, 정수 : {}, 리스트 : {}", str, num, list);
+    }
+
+    static Stream<Arguments> methodTestProvider() {
+        return Stream.of(
+                Arguments.arguments("가", 1, Arrays.asList("A", "B")),
+                Arguments.arguments("나", 2, Arrays.asList("C", "D"))
+        );
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "가, A",
+            "나, B",
+            "다, C",
+            "라, ''",
+            "ImNull, Metoo"
+    },
+    emptyValue = "Empty",
+    nullValues = {"ImNull", "Metoo"})
+    void CSV_테스트(String hangul, String alpha) {
+        log.info("한글 : {}, 알파벳 : {}", hangul, alpha);
+        // assertNull(hangul, alpha); // nullValue로 지정된 값만 Null로 변경됨
     }
 }
