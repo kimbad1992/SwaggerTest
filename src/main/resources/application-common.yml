@@ -1,0 +1,25 @@
+spring:
+  config:
+    activate:
+      on-profile: "common"
+  devtools:
+    livereload:
+      enabled: true
+  application:
+    name: SwaggerTest
+  mvc:
+    static-path-pattern: /static/**
+  web:
+    resources:
+      static-locations: /static/
+server:
+  port: 3000
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    session:
+      timeout: 1800

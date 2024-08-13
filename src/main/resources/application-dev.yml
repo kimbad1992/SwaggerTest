@@ -1,0 +1,49 @@
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:~/testdb;AUTO_SERVER=TRUE
+    username: sa
+    password:
+    type: com.zaxxer.hikari.HikariDataSource
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  batch:
+    jdbc:
+      initialize-schema: always
+  jpa:
+    hibernate:
+      ddl-auto: create # create, create-drop, validate, update, none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  # H2 사용
+  h2:
+    console:
+      enabled: true
+      path: /h2-console  # H2 콘솔에 접근하는 경로
+
+# Swagger 설정
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui
+
+# Logging 설정
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){green} %clr(%-5level) %clr(${PID:-}){magenta} %clr(---){faint} [PayrollCalc] %clr(%logger - %M{10}){cyan} - %msg%n)"
+  level:
+    root: INFO
+    org.study: DEBUG
+
+# System 변수 설정
+system:
+  jwt:
+    secret: 4pX5K/OQxZgQKLxnk09tkZqZ/q3KQ0MUnoNNhoR4Ltg=

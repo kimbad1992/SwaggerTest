@@ -1,11 +1,12 @@
 package org.study.swaggertest.provider;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.study.swaggertest.dto.UserDetail;
@@ -13,10 +14,16 @@ import org.study.swaggertest.entity.User;
 import org.study.swaggertest.service.UserService;
 
 @Component
-public class UserAuthenticationProvider implements AuthenticationProvider {
+public class UserAuthenticationProvider extends DaoAuthenticationProvider {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    public UserAuthenticationProvider(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.setUserDetailsService(userDetailsService);
+        this.setPasswordEncoder(bCryptPasswordEncoder);
+    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -44,6 +51,6 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
+        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
     }
 }

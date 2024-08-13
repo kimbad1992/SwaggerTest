@@ -1,0 +1,45 @@
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/swagger_test
+    username: swagger
+    password: swagger#1
+    type: com.zaxxer.hikari.HikariDataSource
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  batch:
+    jdbc:
+      initialize-schema: always
+  jpa:
+    hibernate:
+      ddl-auto: create # create, create-drop, validate, update, none
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+# Swagger 설정
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui
+
+# Logging 설정
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){green} %clr(%-5level) %clr(${PID:-}){magenta} %clr(---){faint} [PayrollCalc] %clr(%logger - %M{10}){cyan} - %msg%n)"
+  level:
+    root: INFO
+    org.study: DEBUG
+
+# System 변수 설정
+system:
+  jwt:
+    secret: 4pX5K/OQxZgQKLxnk09tkZqZ/q3KQ0MUnoNNhoR4Ltg=

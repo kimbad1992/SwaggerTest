@@ -117,6 +117,5 @@ public class UserController {
         );
 
         return ResponseEntity.ok(jwtTokenProvider.generateToken(auth));
-
     }
 }
