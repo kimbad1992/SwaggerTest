@@ -10,9 +10,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.study.swaggertest.dto.JWTToken;
 import org.study.swaggertest.dto.LoginRequestDto;
 import org.study.swaggertest.entity.User;
+import org.study.swaggertest.provider.JWTTokenProvider;
+import org.study.swaggertest.provider.UserAuthenticationProvider;
 import org.study.swaggertest.service.UserService;
 
 import java.util.List;
@@ -25,6 +30,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JWTTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private UserAuthenticationProvider authenticationProvider;
 
     @Operation(summary = "[회원] 모든 회원 가져오기", description = "모든 회원을 가져옵니다.")
     @GetMapping("/users")
@@ -84,9 +95,10 @@ public class UserController {
 
     @Operation(summary = "[회원] 로그인", description = "username과 password로 로그인합니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "로그인 요청 성공시 닉네임을 응답 받습니다.", content = @Content(
+            @ApiResponse(responseCode = "200", description = "로그인 요청 성공 시 JWT 토큰을 응답 받습니다.", content = @Content(
                     mediaType = "application/json",
-                    examples = @ExampleObject(value = "{\"nickname\": \"닉네임\"}")
+                    schema = @Schema(implementation = JWTToken.class),
+                    examples = @ExampleObject(value = "{\"accessToken\": \"your_jwt_token\", \"refreshToken\": \"your_refresh_token\"}")
             )),
             @ApiResponse(responseCode = "401", description = "일치하는 회원이 없을 경우의 응답 코드입니다.", content = @Content(
                     mediaType = "application/json",
@@ -94,13 +106,17 @@ public class UserController {
             ))
     })
     @PostMapping("/users/login")
-    public ResponseEntity<String> login(
+    public ResponseEntity<?> login(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "로그인 정보",
                     required = true, content = @Content(schema = @Schema(implementation = LoginRequestDto.class)))
             @RequestBody LoginRequestDto loginRequest) {
-        Optional<String> nickname = userService.login(loginRequest.username(), loginRequest.password());
-        return nickname.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.status(401).body("일치하는 정보가 없습니다."));
-    }
+        // Optional<String> nickname = userService.login(loginRequest.username(), loginRequest.password());
 
+        Authentication auth = authenticationProvider.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password())
+        );
+
+        return ResponseEntity.ok(jwtTokenProvider.generateToken(auth));
+
+    }
 }

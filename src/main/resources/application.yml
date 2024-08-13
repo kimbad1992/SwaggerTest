@@ -17,7 +17,7 @@ spring:
       initialize-schema: always
   jpa:
     hibernate:
-      ddl-auto: update # create, create-drop, validate, update, none
+      ddl-auto: create # create, create-drop, validate, update, none
     show-sql: true
     properties:
       hibernate:
@@ -51,3 +51,7 @@ logging:
   level:
     root: INFO
     org.study: DEBUG
+
+system:
+  jwt:
+    secret: 4pX5K/OQxZgQKLxnk09tkZqZ/q3KQ0MUnoNNhoR4Ltg=

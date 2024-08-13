@@ -6,14 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.Spy;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.study.swaggertest.entity.User;
 import org.study.swaggertest.repository.UserRepository;
 import org.study.swaggertest.service.UserService;
 
-import java.util.List;
-
-@SpringBootTest
 @Slf4j
 public class Mockito_InjectMocks_테스트 {
 

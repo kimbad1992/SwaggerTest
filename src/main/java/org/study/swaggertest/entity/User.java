@@ -3,10 +3,10 @@ package org.study.swaggertest.entity;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Schema(name = "유저", description = "유저 정보 Entity")
 @Entity
@@ -28,6 +28,9 @@ public class User {
     @Column(nullable = false, unique = true, length = 100) // unique 제약 조건 추가
     private String nickname;
 
+    @Column(nullable = false, unique = true, length = 100)
+    private String email;
+
     @Column(nullable = false, updatable = false)
     @Hidden
     private LocalDateTime createdAt;
@@ -35,6 +38,27 @@ public class User {
     @Column(nullable = false)
     @Hidden
     private LocalDateTime updatedAt;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles;
+
+    @Column(nullable = false)
+    private Boolean enabled;
+
+    @Column(length = 50)
+    private String oauthProvider;
+
+    @Column(length = 100)
+    private String oauthProviderId;
+
+    @Column(length = 255)
+    private String oauthProfilePicture;
+
+    @Column(nullable = false)
+    private Boolean twoFactorEnabled;
+
+    @Column(length = 100)
+    private String twoFactorSecret;
 
     @PrePersist
     protected void onCreate() {
@@ -47,4 +71,3 @@ public class User {
         updatedAt = LocalDateTime.now();
     }
 }
-
