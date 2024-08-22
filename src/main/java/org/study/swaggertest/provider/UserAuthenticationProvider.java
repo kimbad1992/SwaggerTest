@@ -9,7 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.study.swaggertest.dto.UserDetail;
+import org.study.swaggertest.model.UserDetail;
 import org.study.swaggertest.entity.User;
 import org.study.swaggertest.service.UserService;
 

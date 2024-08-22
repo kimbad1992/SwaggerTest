@@ -1,5 +1,8 @@
-package org.study.swaggertest.entity;
+package org.study.swaggertest.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum CountryEnum {
     UNITED_STATES("US", "United States", "Washington, D.C."),
     CANADA("CA", "Canada", "Ottawa"),
@@ -42,15 +45,4 @@ public enum CountryEnum {
         this.capital = capital;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCapital() {
-        return capital;
-    }
 }

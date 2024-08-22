@@ -10,8 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
-import org.study.swaggertest.dto.JWTToken;
-import org.study.swaggertest.dto.UserDetail;
+import org.study.swaggertest.model.JWTToken;
+import org.study.swaggertest.model.UserDetail;
 
 import java.security.Key;
 import java.util.Arrays;

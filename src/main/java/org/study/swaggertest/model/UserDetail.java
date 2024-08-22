@@ -1,4 +1,4 @@
-package org.study.swaggertest.dto;
+package org.study.swaggertest.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

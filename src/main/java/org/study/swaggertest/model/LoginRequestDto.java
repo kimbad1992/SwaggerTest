@@ -1,4 +1,4 @@
-package org.study.swaggertest.dto;
+package org.study.swaggertest.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

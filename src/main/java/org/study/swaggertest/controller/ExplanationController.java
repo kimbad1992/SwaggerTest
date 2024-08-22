@@ -10,10 +10,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.study.swaggertest.entity.CountryEnum;
+import org.study.swaggertest.enums.CountryEnum;
 import org.study.swaggertest.entity.Explain;
 
 @Tag(name = "특정 API 그룹", description = "이 Tag를 설명하는 설명란입니다.\n" +

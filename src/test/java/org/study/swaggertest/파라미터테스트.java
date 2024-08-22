@@ -6,7 +6,7 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
-import org.study.swaggertest.entity.CountryEnum;
+import org.study.swaggertest.enums.CountryEnum;
 
 import java.util.List;
 import java.util.Map;

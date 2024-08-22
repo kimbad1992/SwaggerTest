@@ -1,11 +1,10 @@
-package org.study.swaggertest.dto;
+package org.study.swaggertest.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Builder
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 public class JWTToken {
     private String grantType;

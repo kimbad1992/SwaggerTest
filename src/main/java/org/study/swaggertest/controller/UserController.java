@@ -13,15 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import org.study.swaggertest.dto.JWTToken;
-import org.study.swaggertest.dto.LoginRequestDto;
+import org.study.swaggertest.model.JWTToken;
+import org.study.swaggertest.model.LoginRequestDto;
 import org.study.swaggertest.entity.User;
 import org.study.swaggertest.provider.JWTTokenProvider;
 import org.study.swaggertest.provider.UserAuthenticationProvider;
 import org.study.swaggertest.service.UserService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Tag(name = "회원 API", description = "회원 관련 API입니다.")
 @RestController

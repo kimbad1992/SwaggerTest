@@ -2,4 +2,4 @@ spring:
   profiles:
     group:
       "dev" : "dev,common"
-      "prod" : "prd,common"
+      "prod" : "prod,common"
